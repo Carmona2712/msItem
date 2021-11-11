@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IItemService {
 
-    public List<Item> findAll();
+    public ResponseEntity<List<Item>> findAll();
 
-    public Item findById(Long id,Integer quantity);
+    public ResponseEntity<Item> findById(Long id,Integer quantity);
 
 
 }

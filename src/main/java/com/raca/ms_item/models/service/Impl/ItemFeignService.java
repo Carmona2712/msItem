@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Service("feign-client-product")
 @Primary
 public class ItemFeignService implements IItemService {
 
@@ -23,16 +23,16 @@ public class ItemFeignService implements IItemService {
     //private ItemService itemService;
 
     @Override
-    public List<Item> findAll() {
-        return ((List<Product>) clientProductRest.findAll()).stream().map(p ->{
+    public ResponseEntity<List<Item>> findAll() {
+        return new ResponseEntity(((List<Product>) clientProductRest.findAll()).stream().map(p ->{
           return  new Item(p,2);
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toList()),HttpStatus.OK);
     }
 
     @Override
-    public Item findById(Long id, Integer quantity) {
-        Product product = (Product) clientProductRest.findById(id);
+    public ResponseEntity<Item> findById(Long id, Integer quantity) {
+        Product product = clientProductRest.findById(id).getBody();
         System.out.println(product.toString());
-        return new Item(product,quantity);
+        return new ResponseEntity(new Item(product,quantity),HttpStatus.OK);
     }
 }

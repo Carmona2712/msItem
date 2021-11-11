@@ -22,19 +22,17 @@ public class ItemController {
     private ItemFeignService itemService;
 
     @GetMapping("/getAll")
-    public List<Item> getAll() {
+    public ResponseEntity<List<Item>> getAll() {
         return itemService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Item getById(@PathVariable("id") Long id) {
-        Item item = null;
+    public ResponseEntity<Item> getById(@PathVariable("id") Long id) {
         try{
-            item =  itemService.findById(id, 2);
+            return new ResponseEntity(itemService.findById(id, 2),HttpStatus.OK);
         }catch(Exception ex){
-            System.err.println(ex);
+            return new ResponseEntity(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return item;
     }
 
 

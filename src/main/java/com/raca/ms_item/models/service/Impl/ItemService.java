@@ -22,6 +22,16 @@ public class ItemService implements IItemService {
     private RestTemplate clientRest;
 
     @Override
+    public ResponseEntity<List<Item>> findAll() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Item> findById(Long id, Integer quantity) {
+        return null;
+    }
+
+    /*@Override
     public List<Item> findAll() {
         List<Product>  products = Arrays.asList(clientRest.getForObject("http://localhost:8001/api/product/getAll",Product[].class));
        return products.stream().map(p -> new Item(p,1)).collect(Collectors.toList());
@@ -33,5 +43,7 @@ public class ItemService implements IItemService {
         parameters.put("id",id.toString());
         Product product = clientRest.getForObject("http://localhost:8001/api/product/get/{id}",Product.class,parameters);
         return new Item(product,quantity);
-    }
+    }*/
+
+
 }

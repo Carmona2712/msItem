@@ -7,6 +7,7 @@ public class Product implements Serializable {
 
     private Long id;
     private String name;
+    private int port;
     private Double cost;
     private Date createAt;
 
@@ -43,6 +44,14 @@ public class Product implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     @Override

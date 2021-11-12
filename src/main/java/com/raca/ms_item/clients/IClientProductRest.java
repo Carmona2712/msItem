@@ -20,10 +20,10 @@ public interface IClientProductRest {
     @GetMapping("/get/{id}")
     public Product findById(@PathVariable("id") Long id); */
 
-    @GetMapping("/getAll")
+    @GetMapping("/api/product/getAll")
     public ResponseEntity<List<Product>> findAll();
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/api/product/get/{id}")
     public ResponseEntity<Product> findById(@PathVariable("id") Long id);
 
 }

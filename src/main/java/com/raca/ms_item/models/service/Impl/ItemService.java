@@ -3,7 +3,10 @@ package com.raca.ms_item.models.service.Impl;
 import com.raca.ms_item.models.entity.Item;
 import com.raca.ms_item.models.entity.Product;
 import com.raca.ms_item.models.service.IItemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,19 +19,26 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Primary
 public class ItemService implements IItemService {
+
+    private static final Logger log = LoggerFactory.getLogger(ItemService.class);
 
     @Autowired
     private RestTemplate clientRest;
 
     @Override
     public ResponseEntity<List<Item>> findAll() {
-        return null;
+        log.info("------ Client REST -----------------------");
+        List<Product>  products = Arrays.asList(clientRest.getForObject("http://ms_item/api/product/getAll",Product[].class));
+        return new ResponseEntity(products.stream().map(p -> new Item(p,1)).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Item> findById(Long id, Integer quantity) {
-        return null;
+        log.info("------ Client REST -----------------------");
+        List<Product>  products = Arrays.asList(clientRest.getForObject("http://ms_item/api/product/getAll",Product[].class));
+        return new ResponseEntity(products.stream().map(p -> new Item(p,1)).collect(Collectors.toList()),HttpStatus.OK);
     }
 
     /*@Override

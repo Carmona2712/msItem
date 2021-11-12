@@ -28,6 +28,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Item> getById(@PathVariable("id") Long id) {
+        System.out.println(itemService.findById(id, 2).toString());
         try{
             return new ResponseEntity(itemService.findById(id, 2),HttpStatus.OK);
         }catch(Exception ex){

@@ -23,7 +23,7 @@ public class ItemFeignService implements IItemService {
 
     @Override
     public ResponseEntity<List<Item>> findAll() {
-        return new ResponseEntity(((List<Product>) clientProductRest.findAll()).stream().map(p ->{
+        return new ResponseEntity((clientProductRest.findAll().getBody()).stream().map(p ->{
           return  new Item(p,2);
         }).collect(Collectors.toList()),HttpStatus.OK);
     }

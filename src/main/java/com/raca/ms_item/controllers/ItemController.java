@@ -23,7 +23,7 @@ public class ItemController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Item>> getAll() {
-        return itemService.findAll();
+        return new ResponseEntity(itemService.findAll(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
